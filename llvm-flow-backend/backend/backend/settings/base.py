@@ -12,9 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import datetime
 from pickle import TRUE
 import environ
-import os
+import os, json
 from pathlib import Path
-from django.core.management.utils import get_random_secret_key
+from django.core.exceptions import ImproperlyConfigured
 
 
 env = environ.Env(
@@ -22,9 +22,6 @@ env = environ.Env(
 )
 # reading .env file
 environ.Env.read_env('.env')
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('DJANGO_SECRET_KEY', default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = env.bool('DEBUG', default=True)
@@ -43,7 +40,21 @@ REAL_BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c5^q27ji)n+z*j_h(2dr+ovb)+&t90$(=9i=r*#@p*%6=_h1qh'
+secret_file = os.path.join(BASE_DIR, 'secrets.json')  # secrets.json 파일 위치를 명시
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting):
+    """비밀 변수를 가져오거나 명시적 예외를 반환한다."""
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+
+SECRET_KEY = get_secret("SECRET_KEY")
 
 # Application definition
 
