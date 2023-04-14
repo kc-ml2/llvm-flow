@@ -1,0 +1,13 @@
+@import '../../../styles/variable';
+
+.loading {
+  text-align: center;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  h1 {
+    font-weight: 700;
+  }
+}

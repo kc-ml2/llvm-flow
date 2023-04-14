@@ -1,0 +1,182 @@
+@import '../../../styles/variable';
+
+.upload {
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  min-height: 70vh;
+  max-width: 1400px;
+  width: 50%;
+
+  .navlink {
+    margin-bottom: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    a {
+      margin: 1rem;
+      text-decoration: none;
+      padding-left: 1rem;
+      padding-top: 0.5rem;
+      padding-right: 1rem;
+      padding-bottom: 0.5rem;
+    }
+
+    #active {
+      color: white;
+      background-color: $purple;
+      border: 2px solid $purple;
+      border-radius: 25px;
+      font-weight: 500;
+    }
+
+    #deactive {
+      color: $purple;
+      border: 2px solid $purple;
+      border-radius: 25px;
+      font-weight: 500;
+    }
+  }
+
+  .userName {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    padding-bottom: 1rem;
+
+    label {
+      font-weight: 600;
+      grid-row: 1;
+      grid-column: 1;
+      color: white;
+      background-color: $dark;
+      border-radius: 3px;
+      width: 90%;
+      padding: 4px;
+      padding-left: 10px;
+    }
+    input {
+      border: 1px solid $dark;
+      border-radius: 5px;
+      color: $dark;
+      padding: 0.3rem;
+      width: 100%;
+      grid-row: 1;
+      grid-column: 2;
+    }
+  }
+
+  .file {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    padding-bottom: 1rem;
+
+    label {
+      font-weight: 600;
+      grid-row: 1;
+      grid-column: 1;
+      color: white;
+      background-color: $dark;
+      border-radius: 3px;
+      width: 90%;
+      padding: 4px;
+      padding-left: 10px;
+    }
+
+    input {
+      font-size: 1rem !important;
+      width: 100%;
+      grid-row: 1;
+      grid-column: 2;
+      color: $gray;
+    }
+  }
+
+  .pass {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    padding-bottom: 1rem;
+
+    label {
+      font-weight: 600;
+      grid-row: 1;
+      grid-column: 1;
+      color: white;
+      background-color: $dark;
+      border-radius: 3px;
+      width: 90%;
+      padding: 4px;
+      padding-left: 10px;
+    }
+    input {
+      border: 1px solid $dark;
+      border-radius: 5px;
+      color: $dark;
+      padding: 0.3rem;
+      width: 100%;
+      grid-row: 1;
+      grid-column: 2;
+    }
+  }
+
+  .cmd {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    background-color: $dark;
+    border-radius: 5px;
+    color: white;
+    padding: 1rem;
+    h5 {
+      font-size: 0.7rem;
+      color: $gray;
+    }
+
+    i {
+      color: $highlight;
+      font-style: normal;
+    }
+  }
+
+  .clang {
+    margin-bottom: 3rem;
+    // background-color: $lightgray;
+    border: 1px solid $gray;
+    border-radius: 5px;
+    padding: 1rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    color: $dark;
+
+    i {
+      font-style: normal;
+      color: $purple;
+      // border: 1px solid $gray;
+      background-color: $lightgray;
+      padding: 0.1rem;
+      padding-left: 0.2rem;
+      padding-right: 0.2rem;
+      font-size: 0.8rem;
+      border-radius: 5px;
+    }
+  }
+}
+
+#submit {
+  text-align: center;
+  input {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .upload {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .upload {
+    width: 90%;
+  }
+}

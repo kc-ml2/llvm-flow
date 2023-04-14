@@ -1,0 +1,81 @@
+{
+  "name": "CFG for 'main' function",
+  "directed": true,
+  "strict": false,
+  "label": "CFG for 'main' function",
+  "_subgraph_cnt": 0,
+  "objects": [
+    {
+      "_gvid": 0,
+      "name": "Node0x14707f0",
+      "label": "{%0:\\l  %1 = alloca i32, align 4\\l  %2 = alloca [50 x i8], align 16\\l  %3 = alloca i32, align 4\\l  %4 = alloca i32, align 4\\l  %5 = alloca i32, align 4\\l  %6 = alloca %struct._IO_FILE*, align 8\\l  store i32 0, i32* %1, align 4\\l  %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([27 x i8], [27\\l... x i8]* @.str, i64 0, i64 0))\\l  %8 = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([3 x\\l... i8], [3 x i8]* @.str.1, i64 0, i64 0), i32* %5)\\l  %9 = call %struct._IO_FILE* @fopen(i8* getelementptr inbounds ([15 x i8],\\l... [15 x i8]* @.str.2, i64 0, i64 0), i8* getelementptr inbounds ([2 x i8], [2 x\\l... i8]* @.str.3, i64 0, i64 0))\\l  store %struct._IO_FILE* %9, %struct._IO_FILE** %6, align 8\\l  %10 = load %struct._IO_FILE*, %struct._IO_FILE** %6, align 8\\l  %11 = icmp eq %struct._IO_FILE* %10, null\\l  br i1 %11, label %12, label %14\\l|{<s0>T|<s1>F}}",
+      "shape": "record"
+    },
+    {
+      "_gvid": 1,
+      "name": "Node0x14721c0",
+      "label": "{%12:\\l12:                                               \\l  %13 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([7 x i8], [7 x\\l... i8]* @.str.4, i64 0, i64 0))\\l  call void @exit(i32 1) #4\\l  unreachable\\l}",
+      "shape": "record"
+    },
+    {
+      "_gvid": 2,
+      "name": "Node0x1472210",
+      "label": "{%14:\\l14:                                               \\l  store i32 0, i32* %4, align 4\\l  br label %15\\l}",
+      "shape": "record"
+    },
+    {
+      "_gvid": 3,
+      "name": "Node0x1472630",
+      "label": "{%15:\\l15:                                               \\l  %16 = load i32, i32* %4, align 4\\l  %17 = load i32, i32* %5, align 4\\l  %18 = icmp slt i32 %16, %17\\l  br i1 %18, label %19, label %33\\l|{<s0>T|<s1>F}}",
+      "shape": "record"
+    },
+    {
+      "_gvid": 4,
+      "name": "Node0x1472810",
+      "label": "{%19:\\l19:                                               \\l  %20 = load i32, i32* %4, align 4\\l  %21 = add nsw i32 %20, 1\\l  %22 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([27 x i8], [27\\l... x i8]* @.str.5, i64 0, i64 0), i32 %21)\\l  %23 = getelementptr inbounds [50 x i8], [50 x i8]* %2, i64 0, i64 0\\l  %24 = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([3 x\\l... i8], [3 x i8]* @.str.6, i64 0, i64 0), i8* %23)\\l  %25 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([14 x i8], [14\\l... x i8]* @.str.7, i64 0, i64 0))\\l  %26 = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([3 x\\l... i8], [3 x i8]* @.str.1, i64 0, i64 0), i32* %3)\\l  %27 = load %struct._IO_FILE*, %struct._IO_FILE** %6, align 8\\l  %28 = getelementptr inbounds [50 x i8], [50 x i8]* %2, i64 0, i64 0\\l  %29 = load i32, i32* %3, align 4\\l  %30 = call i32 (%struct._IO_FILE*, i8*, ...) @fprintf(%struct._IO_FILE* %27,\\l... i8* getelementptr inbounds ([22 x i8], [22 x i8]* @.str.8, i64 0, i64 0), i8*\\l... %28, i32 %29)\\l  %31 = load i32, i32* %4, align 4\\l  %32 = add nsw i32 %31, 1\\l  store i32 %32, i32* %4, align 4\\l  br label %15\\l}",
+      "shape": "record"
+    },
+    {
+      "_gvid": 5,
+      "name": "Node0x1472860",
+      "label": "{%33:\\l33:                                               \\l  %34 = load %struct._IO_FILE*, %struct._IO_FILE** %6, align 8\\l  %35 = call i32 @fclose(%struct._IO_FILE* %34)\\l  ret i32 0\\l}",
+      "shape": "record"
+    }
+  ],
+  "edges": [
+    {
+      "_gvid": 0,
+      "tail": 0,
+      "head": 1,
+      "tailport": "s0"
+    },
+    {
+      "_gvid": 1,
+      "tail": 0,
+      "head": 2,
+      "tailport": "s1"
+    },
+    {
+      "_gvid": 2,
+      "tail": 2,
+      "head": 3
+    },
+    {
+      "_gvid": 3,
+      "tail": 3,
+      "head": 4,
+      "tailport": "s0"
+    },
+    {
+      "_gvid": 4,
+      "tail": 3,
+      "head": 5,
+      "tailport": "s1"
+    },
+    {
+      "_gvid": 5,
+      "tail": 4,
+      "head": 3
+    }
+  ]
+}

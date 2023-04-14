@@ -1,0 +1,78 @@
+@import '../../../styles/variable';
+
+.container {
+  border-bottom: 1px solid $gray;
+
+  ul {
+    list-style: none;
+  }
+
+  .logo {
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .NavBar {
+    background-color: transparent;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1400px;
+
+    .toggler {
+      background-color: transparent;
+      border: transparent;
+      span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        margin-bottom: 5px;
+        position: relative;
+        background: $purple;
+      }
+    }
+
+    .toggler:active {
+      box-shadow: none;
+    }
+
+    .toggler:focus {
+      box-shadow: none;
+    }
+
+    .right {
+      justify-content: end;
+      text-align: end;
+      .items {
+        padding-left: 1rem;
+        color: $dark;
+        justify-content: end;
+      }
+    }
+  }
+
+  .nav {
+    //for safari browser
+    margin-left: auto;
+    margin-right: 0;
+    // for safari browser
+  }
+
+  .dropdown {
+    font-weight: 600;
+  }
+
+  .dropdown:hover {
+    color: $purple !important;
+  }
+
+  #collapseButton {
+    background-color: transparent;
+    border: transparent;
+  }
+
+  #space {
+    justify-content: end;
+  }
+}

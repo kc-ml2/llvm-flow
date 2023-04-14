@@ -1,0 +1,143 @@
+@import './variable';
+
+//navbar
+.nav {
+  background-color: transparent;
+  border: transparent;
+  padding-top: $btn-padding-y;
+  padding-bottom: $btn-padding-y;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  color: $dark;
+  font-size: 1rem;
+
+  a {
+    text-decoration: none;
+    color: $dark;
+  }
+
+  a:hover {
+    color: $purple;
+  }
+}
+
+.nav:hover {
+  background-color: transparent;
+  color: $purple;
+}
+
+.nav:focus {
+  background-color: transparent;
+  color: $purple;
+  outline: 0;
+}
+
+.nav:active {
+  background-color: transparent;
+  color: $purple;
+  outline: 0;
+}
+
+//default - sign in, tutorial, submit, open guide, logout
+.default {
+  background-color: transparent;
+  border: 2px solid $purple;
+  border-radius: 28px;
+  padding-top: $btn-padding-y;
+  padding-bottom: $btn-padding-y;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  color: $purple;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.default:hover {
+  background-color: $lightpurple;
+}
+
+.default_fill {
+  background-color: $purple;
+  border: 2px solid $purple;
+  border-radius: 28px;
+  padding-top: $btn-padding-y;
+  padding-bottom: $btn-padding-y;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+//mini - profile start, profile delete
+.mini {
+  background-color: transparent;
+  border: 2px solid $purple;
+  border-radius: 28px;
+  padding-top: $btn-padding-y-sm;
+  padding-bottom: $btn-padding-y-sm;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  color: $purple;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.mini:hover {
+  background-color: $lightpurple;
+}
+
+.mini_fill {
+  background-color: $purple;
+  border: 2px solid $purple;
+  border-radius: 28px;
+  padding-top: $btn-padding-y-sm;
+  padding-bottom: $btn-padding-y-sm;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.mini_gray {
+  background-color: $gray;
+  border: 2px solid $gray;
+  border-radius: 28px;
+  padding-top: $btn-padding-y-sm;
+  padding-bottom: $btn-padding-y-sm;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+//transparent - main page
+.transparent {
+  background-color: transparent;
+  border: transparent;
+}
+
+
+//download .ll file
+.download {
+  background-color: white;
+  color: $dark;
+  border: 1px solid white;
+  border-radius: 25px;
+  margin-top: 1rem;
+  padding-top: $btn-padding-y-sm;
+  padding-bottom: $btn-padding-y-sm;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  font-weight: 600;
+  i{
+    color: $purple !important;
+  }
+}
+
+.download:hover {
+  background-color: transparent;
+  color: white;
+}

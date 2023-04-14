@@ -1,0 +1,45 @@
+@import '../../../styles/variable';
+
+.pagination {
+  text-align: center;
+  padding-right: 40px;
+  width: 100%;
+  margin: 0 auto;
+
+  li {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    color: $dark;
+    font-weight: 600;
+    width: 40px;
+
+    a {
+      color: $dark;
+      padding: 0.5rem;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: $dark !important;
+      background-color: $gray;
+      padding: 0.5rem;
+      border-radius: 5px;
+      font-weight: 600;
+      margin: 0 auto;
+    }
+  }
+
+  li:hover {
+    color: $dark;
+  }
+}
+
+.active {
+  a {
+    color: $dark !important;
+    background-color: $gray;
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+}

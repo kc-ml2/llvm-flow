@@ -1,0 +1,147 @@
+@import '../../../styles/variable';
+
+.main {
+  text-align: center;
+  margin: 0 auto;
+  height: 100%;
+  max-width: 1400px;
+
+  .title {
+    text-align: center;
+    margin-top: 5rem;
+    h1 {
+      font-weight: 700;
+      line-height: 60px;
+    }
+    h3 {
+      font-weight: 600;
+      line-height: 60px;
+    }
+    button {
+      margin-top: 3rem;
+      font-size: 23.3px;
+      font-weight: 600;
+      border-radius: 50px !important;
+      width: 191.7px !important;
+      height: 66.7px !important;
+    }
+  }
+
+  .example {
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: 5rem;
+    margin-bottom: 10rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border: 1px solid $gray;
+      border-radius: 20px;
+    }
+  }
+
+  .feature {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 10rem;
+
+    #box {
+      padding: 1rem;
+      position: relative;
+      top: 0;
+      transition: top ease 0.2s;
+
+      img {
+        height: 40px;
+        text-align: center;
+      }
+
+      #text {
+        margin: 0 auto;
+        margin-top: 1rem;
+        border: 2px solid $dark;
+        max-width: 230px;
+        border-radius: 30px;
+        padding: 2rem;
+        text-align: center;
+        font-weight: 600;
+        a {
+          color: $purple;
+        }
+      }
+
+      #text2 {
+        margin: 0 auto;
+        margin-top: 1rem;
+        border: 2px solid $dark;
+        max-width: 230px;
+        border-radius: 30px;
+        padding: 1.8rem;
+        text-align: center;
+        font-weight: 600;
+      }
+    }
+
+    #box:hover {
+      top: -10px;
+    }
+  }
+}
+
+#modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+
+  #modalBody {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+
+    button {
+      margin: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .main {
+    .title {
+      h3 {
+        line-height: 100%;
+      }
+    }
+
+    .example {
+      img {
+        height: 80%;
+        width: 80%;
+      }
+    }
+    .feature {
+      #box {
+        img {
+          height: 30px;
+        }
+
+        #text {
+          font-size: 0.8rem;
+        }
+
+        #text2 {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}

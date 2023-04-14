@@ -1,0 +1,8 @@
+@import '../../../styles/variable';
+
+.react-resizable-handle {
+  background-color: $darkgray;
+  border-top-left-radius: 100%;
+  width: 1.2rem;
+  height: 1.2rem;
+}

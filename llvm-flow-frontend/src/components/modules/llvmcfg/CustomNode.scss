@@ -1,0 +1,40 @@
+@import '../../../styles/variable';
+
+.yes {
+  height: 100%;
+  width: 100%;
+  border: 3px solid $purple;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: start;
+  font-size: 12px;
+
+  div {
+    max-width: 300px;
+    max-height: 250px;
+    overflow-y: auto;
+    margin: 5px;
+    p {
+      line-height: 100%;
+    }
+  }
+}
+
+.no {
+  height: 100%;
+  width: 100%;
+  border: 2px solid $gray;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: start;
+  font-size: 12px;
+
+  div {
+    max-width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    p {
+      line-height: 100%;
+    }
+  }
+}

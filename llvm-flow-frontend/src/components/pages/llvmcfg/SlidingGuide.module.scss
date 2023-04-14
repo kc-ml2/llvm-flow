@@ -1,0 +1,9 @@
+@import '../../../styles/variable';
+
+.sliding {
+  z-index: 200 !important;
+  background-color: $lightgray;
+  position: relative;
+  // padding-top: 70px;
+  max-width: 900px;
+}

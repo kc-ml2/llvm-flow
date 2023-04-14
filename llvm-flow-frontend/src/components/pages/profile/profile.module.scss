@@ -1,0 +1,90 @@
+@import '../../../styles/variable';
+
+.profile {
+  padding-top: 5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  margin-top: auto;
+  margin-bottom: 5rem;
+
+  .search {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 800px;
+    .input {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      label {
+        font-weight: 600;
+        grid-row: 1;
+        grid-column: 1;
+        color: white;
+        background-color: $dark;
+        border-radius: 3px;
+        width: 90%;
+        padding: 4px;
+        padding-left: 10px;
+      }
+
+      input {
+        font-size: 1rem !important;
+        width: 100%;
+        grid-row: 1;
+        grid-column: 2;
+      }
+    }
+    .submit {
+      padding: 1rem;
+    }
+  }
+}
+
+.list {
+  margin-top: 4rem;
+  margin-bottom: 15rem;
+
+  table {
+    border-collapse: separate;
+    border-spacing: 5px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  thead {
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    td {
+      border-bottom: 1px solid $dark;
+    }
+  }
+
+  td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  tbody {
+    font-weight: 500;
+    tr:hover {
+      color: $purple;
+    }
+
+    #fileList {
+      max-width: 300px;
+      font-size: 0.8rem;
+    }
+
+    #passOption {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .profile {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

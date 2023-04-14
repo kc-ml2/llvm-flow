@@ -1,0 +1,81 @@
+@import '../../../styles/variable';
+
+.tutorial {
+  max-width: 1400px;
+  margin: 0 auto;
+  color: $dark;
+  margin-bottom: 5rem;
+  #title {
+    border: 1px solid $purple;
+    padding: 1em;
+    border-radius: 10px;
+    margin: 1rem;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    span {
+      font-size: 1rem;
+
+      i {
+        font-style: normal;
+        color: $purple;
+      }
+    }
+  }
+
+  #basic {
+    border: 1px solid $gray;
+    padding: 1em;
+    border-radius: 10px;
+    margin: 1rem;
+    line-height: 200%;
+    font-size: 1rem;
+
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 800px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    a {
+      // text-decoration: none;
+      color: $purple;
+      font-weight: 600;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    code {
+      font-size: 0.8rem !important;
+      line-height: 1.1rem !important;
+      background-color: $light;
+      border-radius: 10px;
+      padding: 0.5rem;
+    }
+
+    button {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.8rem;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    #submit {
+      color: $purple;
+      text-align: center;
+      font-weight: 600;
+      padding: 1rem;
+    }
+  }
+}

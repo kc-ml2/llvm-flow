@@ -1,0 +1,66 @@
+@import '../../../styles/variable';
+
+.layoutflow {
+  flex-grow: 1;
+  position: relative;
+  border: 1px solid $darkgray;
+  z-index: 0 !important;
+  background-color: $cfg;
+  // background-color: white;
+
+  h4 {
+    padding-left: 1rem;
+    padding-top: 1rem;
+    color: $dark;
+    font-size: 1rem;
+  }
+
+  i {
+    font-size: 0.7rem;
+    font-style: normal;
+  }
+}
+
+.layoutflow .controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 12px;
+}
+
+.layoutflow .controls button:first-child {
+  margin-right: 10px;
+}
+
+.react-flow__attribution {
+  background-color: transparent;
+  a {
+    color: $gray;
+  }
+}
+
+path.react-flow__edge-path {
+  stroke-width: 2;
+}
+
+path.react-flow__edge-path:hover {
+  cursor: pointer;
+  stroke-width: 4;
+  stroke: $dark;
+}
+
+path.react-flow__edge-path:active {
+  cursor: pointer;
+  stroke-width: 4;
+  stroke: $dark;
+}
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-width: 4;
+  stroke: $dark;
+}
+
+.react-flow__edge.animated path {
+  stroke-dasharray: 5;
+  -webkit-animation: dashdraw 1s linear infinite;
+  animation: dashdraw 1s linear infinite;
+}

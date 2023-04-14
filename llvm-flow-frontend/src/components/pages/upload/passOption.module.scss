@@ -1,0 +1,90 @@
+@import '../../../styles/variable';
+
+.container {
+  margin: 0 auto;
+  margin-top: 2rem;
+  border: 1px solid $purple;
+  border-radius: 5px;
+  padding: 0.5rem;
+
+  #reference {
+    text-align: end;
+    a {
+      color: $purple;
+    }
+    a:hover {
+      color: $dark;
+    }
+  }
+
+  #title {
+    font-size: 0.9rem;
+    button {
+      background-color: transparent;
+      border: transparent;
+      font-weight: 600;
+      color: $purple;
+    }
+    button:hover {
+      font-weight: 800;
+    }
+  }
+
+  #pass_a {
+    font-size: 0.8rem;
+    display: none;
+    .tooltip {
+      display: inline-block;
+      color: $dark;
+      font-weight: 600;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      background-color: $lightgray;
+      border-radius: 5px;
+    }
+
+    .tooltip_text {
+      display: none;
+      position: absolute;
+      border: 1px solid;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 0.9em;
+      color: white;
+      background: $dark;
+    }
+
+    .tooltip:hover .tooltip_text {
+      display: block;
+    }
+  }
+
+  #pass_t {
+    font-size: 0.8rem;
+    display: none;
+    .tooltip {
+      display: inline-block;
+      color: $dark;
+      font-weight: 600;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      background-color: $lightgray;
+      border-radius: 5px;
+    }
+
+    .tooltip_text {
+      display: none;
+      position: absolute;
+      border: 1px solid;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 0.9em;
+      color: white;
+      background: $dark;
+    }
+
+    .tooltip:hover .tooltip_text {
+      display: block;
+    }
+  }
+}

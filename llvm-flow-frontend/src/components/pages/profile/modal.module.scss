@@ -1,0 +1,31 @@
+@import '../../../styles/variable';
+
+.modal {
+  padding-top: 5%;
+
+  div {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  button {
+    margin: 0.5rem;
+  }
+
+  .modalBody {
+    font-size: 1rem;
+    table {
+      th {
+        padding: 0.5rem;
+      }
+      td {
+        padding: 0.5rem;
+      }
+    }
+  }
+}
+
+.backdrop {
+  background-color: $lightgray !important;
+  opacity: 0.3 !important;
+}

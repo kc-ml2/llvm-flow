@@ -1,0 +1,67 @@
+@import '../../../styles/variable';
+
+.llvmcfg {
+  margin: 0 auto;
+  min-height: 75vh;
+  margin-bottom: 5rem;
+  max-width: 1400px;
+
+  .cfgName {
+    border-radius: 5px;
+    background-color: $dark;
+    color: white;
+    font-size: 14px;
+    padding: 1rem;
+    margin: 1rem;
+    i {
+      font-style: normal;
+      color: $highlight;
+    }
+  }
+
+  hr {
+    width: 97%;
+    opacity: 0.7;
+    height: 10px;
+    background-color: $gray;
+    margin: 0 auto;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: auto;
+
+    .guide {
+      grid-row: 1;
+      grid-column: 1;
+      padding-top: 1rem;
+      padding-left: 1rem;
+    }
+
+    .mode {
+      grid-row: 1;
+      grid-column: 2;
+      text-align: end;
+      padding-top: 1rem;
+      padding-right: 1rem;
+      margin-left: auto;
+      margin-right: 0;
+      z-index: 0 !important;
+    }
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: auto;
+
+    .first {
+      grid-row: 1;
+      grid-column: 1;
+      margin-left: 1rem;
+    }
+
+    .second {
+      grid-row: 1;
+      grid-column: 2;
+    }
+  }
+}
