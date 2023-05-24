@@ -24,7 +24,7 @@ To run this project with Docker, first, you'll need to install [Docker](https://
 1. Clone the repository:
 
 ```
-git clone https://github.com/kc-ml2/llvm-flow-docker.git
+git clone https://github.com/kc-ml2/llvm-flow.git
 ```
 
 2. Build the Docker image:
