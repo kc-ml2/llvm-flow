@@ -30,8 +30,8 @@ function Example() {
       <section id={styles.title}>
         <h3>Tutorial 🎮</h3>
         <span>
-          <i>LLVM-FLOW</i>&nbsp; visualizes 'LLVM IR CFG' interactively and allows
-          you to compare optimization results at a glance. <br></br>
+          <i>LLVM-FLOW</i>&nbsp; visualizes 'LLVM IR CFG' interactively and
+          allows you to compare optimization results at a glance. <br></br>
           Just scroll down <Filter1Icon /> ~ <Filter4Icon /> and discover
           various features of <i>LLVM-FLOW</i> for yourself!
         </span>
