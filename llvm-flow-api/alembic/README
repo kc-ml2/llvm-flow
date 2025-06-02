@@ -1,0 +1,10 @@
+Alembic DB Migration
+====================
+
+1. 마이그레이션 생성
+   alembic revision --autogenerate -m "init"
+
+2. 마이그레이션 적용
+   alembic upgrade head
+
+설정은 /alembic.ini, /alembic/env.py 참고 

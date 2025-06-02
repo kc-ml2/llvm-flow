@@ -155,6 +155,18 @@ node_modules/
 
 # misc
 .DS_Store
+.DS_Store
+*.c
+*.diff
+*.ll
+*.dot
+*.png
+*.csv
+*.json
+*.txt
+db-data/
+media/
+
 /posts/.DS_Store.md
 *.pem
 
