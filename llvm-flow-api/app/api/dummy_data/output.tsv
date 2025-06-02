@@ -1,0 +1,18 @@
+Function 1: vectorAddCPU
+%10 %10
+%33 %32
+
+Function 2: llvm.dbg.declare
+
+Function 3: main
+%24 %24
+%40 %39
+
+Function 4: malloc
+
+Function 5: clock
+
+Function 6: printf
+
+Function 7: free
+

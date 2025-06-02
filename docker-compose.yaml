@@ -1,0 +1,35 @@
+services:
+  api:
+    image: llvm-flow-api:local
+    build:
+      context: ./llvm-flow-api
+    ports:
+      - "8000:8000"
+      - "2222:22"
+    volumes:
+      - ./llvm-flow-api/app:/llvm-flow-api/app
+      - ./llvm-flow-api/media:/llvm-flow-api/media
+      - ./llvm-flow-api/db-data:/llvm-flow-api/db-data
+    environment:
+      - LLVM_FLOW_TEST_MODE=false
+      - LLVM_FLOW_LOGGING_LEVEL=DEBUG
+      - LLVM_FLOW_STAGE=dev
+      - LLVM_FLOW_SQLITE_DB_NAME=db-data/llvm-flow.db.sqlite3
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    depends_on:
+      prestart:
+        condition: service_completed_successfully
+
+  prestart:
+    image: llvm-flow-api:local
+    environment:
+      - LLVM_FLOW_SQLITE_DB_NAME=db-data/llvm-flow.db.sqlite3
+    command: ["bash", "/llvm-flow-api/scripts/prestart.sh"]
+    volumes:
+      - ./llvm-flow-api/db-data:/llvm-flow-api/db-data
