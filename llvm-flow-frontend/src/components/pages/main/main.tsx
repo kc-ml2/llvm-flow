@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 /* eslint-disable multiline-ternary */
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@/redux/hook'
 import styles from './main.module.scss'
@@ -9,13 +8,11 @@ import example from '@/gif/example.gif'
 import exBefore from '../../../exData/exBefore.json'
 import exAfter from '../../../exData/exAfter.json'
 import { setGraphData } from '@/redux/features/graph/graphSlice'
-import check from '@/images/check.png'
-import feature1 from '@/images/feature1.png'
-import feature2 from '@/images/feature2.png'
-import feature3 from '@/images/feature3.png'
-import feature1_1 from '@/images/feature1_1.png'
-import feature2_1 from '@/images/feature2_1.png'
-import feature3_1 from '@/images/feature3_1.png'
+import PlayArrowIcon from '@mui/icons-material/PlayArrow'
+import UploadFileIcon from '@mui/icons-material/UploadFile'
+import SchoolIcon from '@mui/icons-material/School'
+import CodeIcon from '@mui/icons-material/Code'
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
 
 function Main() {
   const navigate = useNavigate()
@@ -34,51 +31,93 @@ function Main() {
     navigate('/tutorial')
   }
 
+  const handleStart = () => {
+    navigate('/upload')
+  }
+
   return (
     <section className={styles.main}>
-      <section className={styles.title}>
-        <h1>LLVM-FLOW</h1>
-        <h3>Visualize the LLVM IR CFG interactively.</h3>
-        <button className={buttons.default} onClick={handleExample}>
-          <img src={check} height="18.3" width="25" /> &nbsp; Tutorial
-        </button>
-      </section>
-      <section className={styles.example}>
-        <button className={buttons.transparent} onClick={handleExample}>
-          <img src={example} />
-        </button>
-      </section>
-      <section className={styles.feature}>
-        <div id={styles.box}>
-          <img src={feature1} />
-          <br></br>
-          <div id={styles.text}>
-            Both{' '}
-            <a href="https://kc-ml2.gitbook.io/llvm-flow/" target="_blank">
-              LLVM-FLOW
-            </a>
-            and{' '}
-            <a href="https://github.com/kc-ml2/llvm-block" target="_blank">
-              LLVM-BLOCK
-            </a>{' '}
-            are available as open source to help with compiler optimization
-            research.
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroContent}>
+          <h1>LLVM-FLOW</h1>
+          <p className={styles.subtitle}>
+            Visualize LLVM IR CFG interactively and compare optimization results at a glance
+          </p>
+          <div className={styles.actionButtons}>
+            <button className={`${buttons.default} ${styles.primaryBtn}`} onClick={handleStart}>
+              <UploadFileIcon />
+              <span>Get Started</span>
+            </button>
+            <button className={`${buttons.transparent} ${styles.secondaryBtn}`} onClick={handleExample}>
+              <SchoolIcon />
+              <span>View Tutorial</span>
+            </button>
           </div>
         </div>
-        <div id={styles.box}>
-          <img src={feature2} />
-          <br></br>
-          <div id={styles.text2}>
-            To create an interactive cfg, simply enter the pass option and
-            upload the file. It also offers tutorials and documentation guides.
-          </div>
+      </section>
+
+      {/* Live Demo Section */}
+      <section className={styles.demoSection}>
+        <div className={styles.demoContainer}>
+          <button className={styles.demoButton} onClick={handleExample}>
+            <img src={example} alt="LLVM-FLOW Interactive Demo" />
+            <div className={styles.playOverlay}>
+              <PlayArrowIcon />
+              <span> tutorial</span>
+            </div>
+          </button>
         </div>
-        <div id={styles.box}>
-          <img src={feature3} />
-          <br></br>
-          <div id={styles.text2}>
-            Various features have been developed to allow easy comparison of
-            CFGs before and after optimization. Also, you can download IR files.
+      </section>
+
+      {/* Features Section */}
+      <section className={styles.featuresSection}>
+        
+        <div className={styles.featuresGrid}>
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>
+              <CodeIcon />
+            </div>
+            <div className={styles.featureContent}>
+              <h3>Open Source Research Tools</h3>
+              <p>
+                Both{' '}
+                <a href="https://kc-ml2.gitbook.io/llvm-flow/" target="_blank" rel="noopener noreferrer">
+                  LLVM-FLOW
+                </a>{' '}
+                and{' '}
+                <a href="https://github.com/kc-ml2/llvm-block" target="_blank" rel="noopener noreferrer">
+                  LLVM-BLOCK
+                </a>{' '}
+                are available as open source to help with compiler optimization research.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>
+              <UploadFileIcon />
+            </div>
+            <div className={styles.featureContent}>
+              <h3>Web Demo & Local Setup</h3>
+              <p>
+                Try LLVM-FLOW easily through our web demo by uploading files and configuring pass options. 
+                You can also git clone the repository to run it locally on your own environment.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.featureCard}>
+            <div className={styles.featureIcon}>
+              <CompareArrowsIcon />
+            </div>
+            <div className={styles.featureContent}>
+              <h3>Advanced Comparison Features</h3>
+              <p>
+                Various features for easy CFG comparison before and after optimization. 
+                Download IR files and analyze optimization results interactively.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -86,4 +125,4 @@ function Main() {
   )
 }
 
-export default Main as React.ComponentType
+export default Main

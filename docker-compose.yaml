@@ -26,6 +26,22 @@ services:
       prestart:
         condition: service_completed_successfully
 
+  frontend:
+    build:
+      context: ./llvm-flow-frontend
+    image: llvm-flow-frontend:local
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./llvm-flow-frontend:/llvm-flow-frontend
+      - /llvm-flow-frontend/node_modules
+    working_dir: /llvm-flow-frontend
+    command: ["npm", "start"]
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - api
+
   prestart:
     image: llvm-flow-api:local
     environment:

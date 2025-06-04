@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
@@ -7,10 +7,15 @@ import { store } from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import './index.scss'
+import { initGA } from './utils/ga'
 
-let persistor = persistStore(store)
+initGA()
 
-ReactDOM.render(
+const persistor = persistStore(store)
+
+const container = document.getElementById('root')
+const root = createRoot(container!)
+root.render(
   <React.Fragment>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
@@ -18,7 +23,6 @@ ReactDOM.render(
       </PersistGate>
     </Provider>
   </React.Fragment>,
-  document.getElementById('root'),
 )
 
 reportWebVitals()

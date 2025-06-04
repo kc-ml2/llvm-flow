@@ -8,9 +8,15 @@ export const getFormData = (url: string) => {
   return axios.get(`${REACT_APP_API_URL}/${url}`, { headers: headers })
 }
 
-export const getJsonData = (url: string) => {
+export const getJsonData = (
+  url: string,
+  params?: Record<string, string | number | boolean | undefined>,
+) => {
   const headers = {
     'Content-type': 'application/json',
   }
-  return axios.get(`${REACT_APP_API_URL}/${url}`, { headers: headers })
+  return axios.get(`${REACT_APP_API_URL}/${url}`, {
+    headers: headers,
+    params: params,
+  })
 }

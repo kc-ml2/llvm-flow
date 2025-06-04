@@ -3,8 +3,8 @@ import { ResizableBox as ReactResizableBox } from 'react-resizable'
 import 'react-resizable/css/styles.css'
 import './ResizableBox.scss'
 
-interface ResizableProps {
-  children: React.ReactChild | React.ReactChild[]
+type ResizableProps = {
+  children: React.ReactNode
 }
 
 export default function ResizableBox({ children }: ResizableProps) {

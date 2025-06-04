@@ -13,6 +13,7 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks'
 import SouthIcon from '@mui/icons-material/South'
 import tutorial1 from '@/images/tutorial1.png'
 import tutorial2 from '@/images/tutorial2.png'
+import passClick from '@/images/passClick.png'
 
 function Example() {
   const handleSubmit = () => {
@@ -41,14 +42,14 @@ function Example() {
           <Filter1Icon /> Prepare source code
         </h4>
         <span>
-          Here's an example of simple C source code.
-          <br></br>We'll compile and optimize this source code by{' '}
+          {/* Here's an example of simple C source code. */}
+          We'll compile and optimize this source code by{' '}
           <a href="https://llvm.org/" target="_blank">
             LLVM
           </a>
           , and compare the CFG before and after optimization.
         </span>
-        <br></br>
+        {/* <br></br>
         <br></br>
         <code>example.c</code>
         <CodeBlock
@@ -56,16 +57,17 @@ function Example() {
           language={'c'}
           showLineNumbers={false}
           theme={tomorrow}
-          id={styles.codeblock}
-        />
+          wrapLines={false}
+          codeBlock
+        /> */}
       </section>
       <section id={styles.basic}>
         <h4>
           <Filter2Icon /> Upload source code with pass option
         </h4>
         <span>
-          Simply do the following <b>3</b> things on{' '}
-          <a href="https://llvmflow.kc-ml2.com/uploadC" target="_blank">
+          Simply do the following <b>4</b> things on{' '}
+          <a href="https://llvmflow.kc-ml2.com/upload" target="_blank">
             start page
           </a>{' '}
           .
@@ -78,6 +80,16 @@ function Example() {
           ,<code>.ll</code> only)
           <br></br>
           <b>3.</b> Fill in LLVM passes for optimization.
+          <br></br>
+          <b>4.</b> Please choose the version of LLVM to use for compilation. Versions from 14 to 20 are available.
+          <br></br>
+          <br></br>
+          <i>
+            You can enter the pass manually, or click the pass box at the bottom
+            (which opens when you press LLVM's Analysis Passes, LLVM's Transform
+            Passes) to enter it automatically like this:
+          </i>
+          <img src={passClick} alt="passClick" />
           <br></br>
           <br></br>
           If you're done with all three, press the submit button! That's all!
@@ -109,7 +121,18 @@ function Example() {
           LLVM-FLOW can do !
         </span>
       </section>
-      <LLVMcfg />
+      
+      <div className={styles.continuePrompt}>
+        <div className={styles.promptContent}>
+          <span>🎯 Try the interactive demo below, then continue scrolling to learn how to access all your results!</span>
+          <SouthIcon className={styles.bounceArrow} />
+        </div>
+      </div>
+      
+      <div className={styles.llvmcfgWrapper}>
+        <LLVMcfg />
+      </div>
+      
       <section id={styles.basic}>
         <h4>
           <Filter4Icon /> Check all your results
@@ -136,4 +159,4 @@ function Example() {
   )
 }
 
-export default Example as React.ComponentType
+export default Example

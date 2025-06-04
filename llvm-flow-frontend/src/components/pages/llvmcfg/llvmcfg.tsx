@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { Suspense, useEffect } from 'react'
+import React, { Suspense } from 'react'
 import SwitchSelector from '@/components/pages/llvmcfg/SwitchSelector'
 import SlidingGuide from './SlidingGuide'
 import { useAppSelector } from '@/redux/hook'
@@ -7,8 +7,9 @@ import styles from './llvmcfg.module.scss'
 import buttons from '@/styles/Button.module.scss'
 import Loading from '@/components/modules/loading/Loading'
 import FileSaver from 'file-saver'
-// import UploadFileIcon from '@mui/icons-material/UploadFile'
 import { UploadFile } from '@mui/icons-material'
+import { postFormData } from '@/api/http-post'
+import { setGraphData } from '@/redux/features/graph/graphSlice'
 
 function LLVMcfg() {
   const {
@@ -23,17 +24,8 @@ function LLVMcfg() {
 
   const { isFull } = useAppSelector((state) => state.mode)
 
-  const LayoutFlow = React.lazy(
-    () => import('@/components/modules/llvmcfg/LayoutFlow'),
-  )
-  const LayoutFlow2 = React.lazy(
-    () => import('@/components/modules/llvmcfg/LayoutFlow2'),
-  )
-  const LayoutFlowFull = React.lazy(
-    () => import('@/components/modules/llvmcfg/LayoutFlowFull'),
-  )
-  const LayoutFlowFull2 = React.lazy(
-    () => import('@/components/modules/llvmcfg/LayoutFlowFull2'),
+  const LayoutFlowFactory = React.lazy(
+    () => import('@/components/modules/llvmcfg/LayoutFlowFactory'),
   )
 
   function downloadBeforeLLfile() {
@@ -79,7 +71,7 @@ function LLVMcfg() {
         <span>
           {before_json.name}
           <br></br>
-          LLVM's passes = <i>{file_pass}</i>
+          current LLVM's passes = <i>{file_pass}</i>
         </span>
         <br></br>
         <button onClick={downloadBeforeLLfile} className={buttons.download}>
@@ -95,19 +87,21 @@ function LLVMcfg() {
         <Suspense fallback={<Loading />}>
           <section className={styles.layout}>
             <div className={styles.first}>
-              <LayoutFlowFull
+              <LayoutFlowFactory
                 llvmJson={before_json}
                 llvmJson_compare={after_json}
                 llvmOutput={before_output}
                 title={'before'}
+                variant={'detailLarge'}
               />
             </div>
             <div className={styles.second}>
-              <LayoutFlowFull2
+              <LayoutFlowFactory
                 llvmJson={after_json}
                 llvmJson_compare={before_json}
                 llvmOutput={after_output}
                 title={'after'}
+                variant={'detailLarge'}
               />
             </div>
           </section>
@@ -117,19 +111,21 @@ function LLVMcfg() {
         <Suspense fallback={<Loading />}>
           <section className={styles.layout}>
             <div className={styles.first}>
-              <LayoutFlow
+              <LayoutFlowFactory
                 llvmJson={before_json}
                 llvmJson_compare={after_json}
                 llvmOutput={before_output}
                 title={'before'}
+                variant={'simpleSmall'}
               />
             </div>
             <div className={styles.second}>
-              <LayoutFlow2
+              <LayoutFlowFactory
                 llvmJson={after_json}
                 llvmJson_compare={before_json}
                 llvmOutput={after_output}
                 title={'after'}
+                variant={'simpleSmall'}
               />
             </div>
           </section>
@@ -139,4 +135,4 @@ function LLVMcfg() {
   )
 }
 
-export default LLVMcfg as React.ComponentType
+export default LLVMcfg

@@ -2,19 +2,27 @@ import axios, { AxiosResponse } from 'axios'
 
 const { REACT_APP_API_URL } = process.env
 
-export const getBaseConfig = (method: any) => ({
+export const getBaseConfig = (method: string) => ({
   method,
-  credentials: 'include',
+  credentials: 'include' as const,
   headers: { 'Content-Type': 'application/json' },
 })
 
-export const serializeResponse = (response: any) => {
+interface ApiResponse<T = unknown> {
+  status: number
+  ok: boolean
+  data: T
+}
+
+export const serializeResponse = <T = unknown>(
+  response: Response,
+): Promise<ApiResponse<T>> => {
   return response
     .text()
     .then((text: string) => {
       return text ? JSON.parse(text) : {}
     })
-    .then((data: any) => ({ status: response.status, ok: response.ok, data }))
+    .then((data: T) => ({ status: response.status, ok: response.ok, data }))
 }
 
 export const httpClient = axios.create({

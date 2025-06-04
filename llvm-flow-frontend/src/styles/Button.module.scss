@@ -42,7 +42,7 @@
 .default {
   background-color: transparent;
   border: 2px solid $purple;
-  border-radius: 28px;
+  border-radius: 10px;
   padding-top: $btn-padding-y;
   padding-bottom: $btn-padding-y;
   padding-left: $btn-padding-x;
@@ -57,23 +57,28 @@
 }
 
 .default_fill {
-  background-color: $purple;
-  border: 2px solid $purple;
-  border-radius: 28px;
+  background-color: $secondary;
+  border: 2px solid $secondary;
+  border-radius: 10px;
   padding-top: $btn-padding-y;
   padding-bottom: $btn-padding-y;
   padding-left: $btn-padding-x;
   padding-right: $btn-padding-x;
-  color: white;
   font-size: 1rem;
   font-weight: 500;
+}
+
+.default_fill:hover {
+  background-color: $purple;
+  color: white;
+  border: 2px solid $purple;
 }
 
 //mini - profile start, profile delete
 .mini {
   background-color: transparent;
   border: 2px solid $purple;
-  border-radius: 28px;
+  border-radius: 10px;
   padding-top: $btn-padding-y-sm;
   padding-bottom: $btn-padding-y-sm;
   padding-left: $btn-padding-x;
@@ -88,9 +93,9 @@
 }
 
 .mini_fill {
-  background-color: $purple;
-  border: 2px solid $purple;
-  border-radius: 28px;
+  background-color: $highlight;
+  border: 2px solid $highlight;
+  border-radius: 10px;
   padding-top: $btn-padding-y-sm;
   padding-bottom: $btn-padding-y-sm;
   padding-left: $btn-padding-x;
@@ -101,14 +106,14 @@
 }
 
 .mini_gray {
-  background-color: $gray;
-  border: 2px solid $gray;
-  border-radius: 28px;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 10px;
   padding-top: $btn-padding-y-sm;
   padding-bottom: $btn-padding-y-sm;
   padding-left: $btn-padding-x;
   padding-right: $btn-padding-x;
-  color: white;
+  color: $dark;
   font-size: 0.7rem;
   font-weight: 500;
 }
@@ -119,25 +124,44 @@
   border: transparent;
 }
 
-
 //download .ll file
 .download {
   background-color: white;
   color: $dark;
   border: 1px solid white;
-  border-radius: 25px;
+  border-radius: 10px;
   margin-top: 1rem;
   padding-top: $btn-padding-y-sm;
   padding-bottom: $btn-padding-y-sm;
   padding-left: $btn-padding-x;
   padding-right: $btn-padding-x;
   font-weight: 600;
-  i{
+  i {
     color: $purple !important;
   }
 }
 
 .download:hover {
   background-color: transparent;
+  color: white;
+}
+
+// llvmcfg, change pass->submit
+
+.default_semi {
+  background-color: $lightpurple;
+  border: 2px solid $purple;
+  border-radius: 10px;
+  padding-top: $btn-padding-y;
+  padding-bottom: $btn-padding-y;
+  padding-left: $btn-padding-x;
+  padding-right: $btn-padding-x;
+  color: $purple;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.default_semi:hover {
+  background-color: $purple;
   color: white;
 }

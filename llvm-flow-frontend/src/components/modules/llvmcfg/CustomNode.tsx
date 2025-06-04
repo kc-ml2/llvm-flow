@@ -5,13 +5,40 @@ import { Handle, Position } from 'react-flow-renderer'
 import { useAppSelector } from '@/redux/hook'
 import { COLORS } from '@/const/color'
 
+interface NodeElement extends HTMLElement {
+  style: CSSStyleDeclaration;
+  id: string;
+  name: string;
+  className: string;
+}
+
+interface NodeData {
+  block_id: string;
+  type: string;
+  label: string[];
+  isSame: 'yes' | 'no';
+}
+
+interface CustomNodeProps {
+  data: NodeData & {
+    layoutConfig: {
+      nodeWidth: number;
+      nodeHeight: number;
+      labelType: 'simple' | 'detail';
+    };
+  };
+}
+
 // eslint-disable-next-line react/display-name
-export default memo(({ data }: any) => {
+export default memo(({ data }: CustomNodeProps) => {
   const { before_output, after_output } = useAppSelector((state) => state.graph)
   const { isFull } = useAppSelector((state) => state.mode)
-  const [fullmode, setFullmode] = useState<boolean>(isFull)
+  const [localFullMode, setLocalFullMode] = useState<boolean>(false)
+  const { layoutConfig } = data
 
-  const changeColor = (sameNode: any, targetNode: any) => {
+  const changeColor = (sameNode: NodeElement | null, targetNode: NodeElement | null) => {
+    if (!sameNode || !targetNode) return;
+    
     if (targetNode.style.backgroundColor === 'rgb(224, 210, 255)') {
       sameNode.style.backgroundColor = 'white'
       targetNode.style.backgroundColor = 'white'
@@ -41,43 +68,54 @@ export default memo(({ data }: any) => {
         const index = before_output.indexOf(id)
         const sameBlockID = after_output[index]
         if (sameBlockID === undefined) {
-          const targetNode = document.getElementById(idWithType)
-          const sameNode = document.getElementById('after' + id)
+          const targetNode = document.getElementById(idWithType) as NodeElement
+          const sameNode = document.getElementById('after' + id) as NodeElement
           changeColor(sameNode, targetNode)
         } else {
-          const targetNode = document.getElementById(idWithType)
-          const sameNode = document.getElementById('after' + sameBlockID)
+          const targetNode = document.getElementById(idWithType) as NodeElement
+          const sameNode = document.getElementById('after' + sameBlockID) as NodeElement
           changeColor(sameNode, targetNode)
         }
       } else if (type === 'after' && id) {
         const index = after_output.indexOf(id)
         const sameBlockID = before_output[index]
         if (sameBlockID === undefined) {
-          const targetNode = document.getElementById(idWithType)
-          const sameNode = document.getElementById('before' + id)
+          const targetNode = document.getElementById(idWithType) as NodeElement
+          const sameNode = document.getElementById('before' + id) as NodeElement
           changeColor(sameNode, targetNode)
         } else {
-          const targetNode = document.getElementById(idWithType)
-          const sameNode = document.getElementById('before' + sameBlockID)
+          const targetNode = document.getElementById(idWithType) as NodeElement
+          const sameNode = document.getElementById('before' + sameBlockID) as NodeElement
           changeColor(sameNode, targetNode)
         }
       }
     }
   }
 
-  const handleSame = (e: any) => {
-    //target 프로퍼티는 실제 이벤트가 발생한 요소를 반환, currentTarget 프로퍼티는 이벤트 핸들러가 바인딩된 요소를 반환.
+  const handleSame = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const target = e.currentTarget as NodeElement;
     findSameBlock(
-      e.currentTarget.id,
-      e.currentTarget.name,
-      e.currentTarget.className,
+      target.id,
+      target.name,
+      target.className,
     )
     e.preventDefault()
   }
 
   const handleFull = () => {
-    setFullmode(!fullmode)
+    setLocalFullMode(!localFullMode)
   }
+
+  // 전체 모드가 detail이면 기본적으로 detail 모드
+  // 전체 모드가 simple이면 기본적으로 simple 모드
+  // localFullMode로 개별 노드의 모드를 토글
+  const isDetailMode = layoutConfig.labelType === 'detail' 
+    ? !localFullMode  // detail 모드에서는 localFullMode가 true일 때 simple로
+    : localFullMode   // simple 모드에서는 localFullMode가 true일 때 detail로
+
+  // detail 모드일 때는 큰 크기, simple 모드일 때는 작은 크기
+  const nodeWidth = isDetailMode ? 350 : 45
+  const nodeHeight = isDetailMode ? 300 : 45
 
   return (
     <>
@@ -124,16 +162,25 @@ export default memo(({ data }: any) => {
         onDoubleClick={handleFull}
         id={data.block_id}
         name={data.type}
-        style={{ backgroundColor: 'white' }}
+        style={{ 
+          backgroundColor: 'white',
+          width: `${nodeWidth}px`,
+          height: `${nodeHeight}px`,
+          transition: 'all 0.3s ease',
+          overflow: 'auto',
+          whiteSpace: isDetailMode ? 'normal' : 'nowrap',
+          padding: isDetailMode ? '10px' : '0',
+          fontSize: isDetailMode ? '14px' : '12px',
+          textAlign: isDetailMode ? 'left' : 'center'
+        }}
       >
-        {fullmode && (
+        {isDetailMode ? (
           <div>
             {data.label.map(function (item: string, i: number) {
               return <p key={i}>{item}</p>
             })}
           </div>
-        )}
-        {!fullmode && (
+        ) : (
           <>{data.block_id.substring(data.block_id.indexOf('%'))}</>
         )}
       </button>

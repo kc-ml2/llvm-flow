@@ -8,7 +8,7 @@
 
   .cfgName {
     border-radius: 5px;
-    background-color: $dark;
+    background-color: $command;
     color: white;
     font-size: 14px;
     padding: 1rem;
@@ -19,13 +19,6 @@
     }
   }
 
-  hr {
-    width: 97%;
-    opacity: 0.7;
-    height: 10px;
-    background-color: $gray;
-    margin: 0 auto;
-  }
   .row {
     display: grid;
     grid-template-columns: auto;
@@ -62,6 +55,48 @@
     .second {
       grid-row: 1;
       grid-column: 2;
+    }
+  }
+
+  .form {
+    button {
+      margin-left: 1rem;
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  .llvmcfg {
+    width: 98%;
+    margin: 0 1%;
+  }
+}
+
+@media (max-width: 900px) {
+  .llvmcfg {
+    .row {
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      
+      .mode {
+        margin-left: 0;
+        align-self: stretch;
+      }
+    }
+    
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    
+    .cfgName {
+      padding: 0.75rem;
+      
+      button {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+      }
     }
   }
 }

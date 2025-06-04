@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Main from '@/components/pages/main/main'
-import UploadC from '@/components/pages/upload/uploadC'
-import UploadCPP from '@/components/pages/upload/uploadCPP'
-import UploadLL from '@/components/pages/upload/uploadLL'
+import Upload from '@/components/pages/upload/upload'
 import Profile from '@/components/pages/profile/profile'
 import LLVMcfg from '@/components/pages/llvmcfg/llvmcfg'
 import Tutorial from '@/components/pages/tutorial/Tutorial'
@@ -29,9 +27,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/uploadC" element={<UploadC />} />
-        <Route path="/uploadCPP" element={<UploadCPP />} />
-        <Route path="/uploadLL" element={<UploadLL />} />
+        <Route path="/upload" element={<Upload />} />
         <Route path="/tutorial" element={<Tutorial />} />
         <Route path="/board" element={<Profile />} />
         {isReady && <Route path="/llvmcfg" element={<LLVMcfg />} />}

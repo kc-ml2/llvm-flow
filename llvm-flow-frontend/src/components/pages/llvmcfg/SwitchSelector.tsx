@@ -1,12 +1,9 @@
-import SwitchSelector from 'react-switch-selector'
 import { useAppSelector, useAppDispatch } from '@/redux/hook'
 import { setIsFullFalse, setIsFullTrue } from '@/redux/features/mode/modeSlice'
-import { COLORS } from '@/const/color'
-import origin from '@/images/origin.png'
-import simple from '@/images/simple.png'
+import styles from './SwitchSelector.module.scss'
 
 export default function App() {
-  //   isFullIndex 0 = simple / 1 = origin
+  //   isFullIndex 0 = simple / 1 = detailed
   const { isFullIndex } = useAppSelector((state) => state.mode)
   const dispatch = useAppDispatch()
 
@@ -18,22 +15,28 @@ export default function App() {
     }
   }
 
-  const switchImg = () => {
-    if (isFullIndex === 0) {
-      return simple
-    } else if (isFullIndex === 1) {
-      return origin
-    }
-  }
-
   return (
-    <div>
-      <button
-        onClick={handleToggle}
-        style={{ backgroundColor: 'transparent', border: 'transparent' }}
-      >
-        <img src={switchImg()} width="140" height="44" />
-      </button>
+    <div className={styles.switchContainer}>
+      <div className={styles.toggleSwitch}>
+        <input
+          type="checkbox"
+          id="toggle"
+          checked={isFullIndex === 1}
+          onChange={handleToggle}
+          className={styles.toggleInput}
+        />
+        <label htmlFor="toggle" className={styles.toggleLabel}>
+          <span className={styles.toggleText}>
+            <span className={`${styles.option} ${isFullIndex === 0 ? styles.active : ''}`}>
+              SIMPLE
+            </span>
+            <span className={`${styles.option} ${isFullIndex === 1 ? styles.active : ''}`}>
+              DETAILED
+            </span>
+          </span>
+          <span className={styles.toggleSlider}></span>
+        </label>
+      </div>
     </div>
   )
 }

@@ -19,7 +19,7 @@ The tool can be accessed either through the <i>LLVM-FLOW website</i> or by runni
 
 ### ✅ Get started: Docker
 
-To run this project with Docker, first, you'll need to install [Docker](https://docs.docker.com/get-docker/) on your machine. Once you've installed Docker, follow these steps:
+To run this project with Docker, first, you'll need to install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/) on your machine. Once you've installed Docker, follow these steps:
 
 1. Clone the repository:
 
@@ -30,13 +30,13 @@ git clone https://github.com/kc-ml2/llvm-flow.git
 2. Build the Docker image:
 
 ```
-docker build -t llvm-flow .
+docker-compose build
 ```
 
 3. Run the Docker container:
 
 ```
-docker run -p 8000:8000 -p 3000:3000 llvm-flow
+docker-compose up
 ```
 
 This will start the application on http://localhost:3000
@@ -61,18 +61,18 @@ This will start the application on http://localhost:3000
 ### ✅ Architecture
 
 ```
-┌── llvm-flow-backend
+┌── llvm-flow-api
 │   ├── backend
-|   	   └ backend		# settings, urls
-|   	   └ llvmcfg		# main fetures
+|   	   └ llvm.sh
+|   	   └ app		    # api, services
 |
 ├── llvm-flow-frontend
 │   ├── src
 |   	   └ components
 |   	  	 └ modules	# common components
-|   	  	 └ pages	# page components
+|   	  	 └ pages	  # page components
 |
-└── Dockerfile
+└── docker-compose.yaml
 
 ```
 
