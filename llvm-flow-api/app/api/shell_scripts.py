@@ -45,14 +45,14 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -dot-cfg before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -dot-cfg after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg after.ll && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
 cd ../after && \
-dot -Txdot_json -o after.json .*.dot"""
+dot -Txdot_json -o after.json .*.dot"""  # noqa: E501
 
 SCRIPT_CMD_LL = """
 cd {} && \
@@ -62,9 +62,9 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -dot-cfg before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -dot-cfg after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg after.ll && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
