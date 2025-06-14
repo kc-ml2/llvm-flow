@@ -82,3 +82,12 @@ This will start the application on http://localhost:3000
 
 - Please make a new branch instead of the current basic branch (ex. main) and work on it.
 - If there is an additional commit after the review, please proceed with the `Re-request` review!
+
+---
+
+### 📢 Presented at EuroLLVM 2023
+
+This project was presented at the **[EuroLLVM Developers' Meeting 2023](https://llvm.org/devmtg/2023-05/)**, with the talk titled **“Spot the Difference with LLVM-FLOW: an open-source interactive visualization tool for comparing IR CFGs”**.
+
+- 📄 [Slides (PDF)](https://drive.google.com/file/d/1INbwCZOdRXDtm7Xa6P6wnJOQiAF6ks4H/view)
+- 🎥 [Presentation Video](https://www.youtube.com/watch?v=bCwteA-9mSs)
