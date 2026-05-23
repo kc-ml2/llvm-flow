@@ -175,6 +175,12 @@ async def upload(
 ) -> OptimizationPostResponse:
     # Validate the format of file_names and opt_passes
     opt_passes: list[str] = validate_string_comma_separated(opt_passes)
+    allowed_llvm_versions = {14, 15, 16, 17, 18, 19, 20}
+    if llvm_version not in allowed_llvm_versions:
+        raise HTTPException(
+            status_code=422,
+            detail="Invalid llvm_version. Allowed versions: 14, 15, 16, 17, 18, 19, 20",
+        )
 
     if TEST_MODE:
         return make_test_result()

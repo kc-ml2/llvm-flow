@@ -26,6 +26,16 @@ RUN chmod +x /tmp/llvm.sh && \
     for version in 15 16 17 18 19 20; do \
         /tmp/llvm.sh $version; \
     done
+
+# Install LLVM/Clang 14 from Debian bookworm repositories as a separate path.
+# (apt.llvm.org does not provide llvm-toolchain-bookworm-14.)
+RUN apt-get update && apt-get install -y \
+    llvm-14 \
+    llvm-14-dev \
+    llvm-14-tools \
+    clang-14 \
+    lld-14 \
+    && rm -rf /var/lib/apt/lists/*
 ENV LLVM_ROOT=/usr/lib/llvm-20
 
 # Download llvm-block source code & build
