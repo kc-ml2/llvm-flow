@@ -1,5 +1,8 @@
 # Use an official Python runtime as a parent image
-FROM python:3.12-bullseye
+FROM python:3.12-bookworm
+
+# Use HTTPS for Debian mirrors to reduce proxy/cache tampering risk.
+RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list.d/debian.sources
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -14,19 +17,13 @@ RUN apt-get update && apt-get install -y \
     libzstd-dev \
     ca-certificates \
     gpg \
+    cmake \
     ninja-build \
     && rm -rf /var/lib/apt/lists/*
 
-
-# Install CMake 4.0.2 from release page instead of manually builing it
-RUN test -f /usr/share/doc/kitware-archive-keyring/copyright || \
-    wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
-RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null
-RUN apt-get update && apt-get install -y cmake
-
 COPY llvm.sh /tmp/llvm.sh
 RUN chmod +x /tmp/llvm.sh && \
-    for version in 14 15 16 17 18 19 20; do \
+    for version in 15 16 17 18 19 20; do \
         /tmp/llvm.sh $version; \
     done
 ENV LLVM_ROOT=/usr/lib/llvm-20
