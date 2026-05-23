@@ -43,15 +43,19 @@ This will start the application on http://localhost:3000
 
 ---
 
-### ✅ Recent Fixes (2026-05-23)
+### ⚙️ Recent Fixes (2026-05-23)
 
-- Fixed an intermittent CFG rendering bug where only one node was shown after uploading `.c` files.
+- Fixed an intermittent CFG rendering bug where only one node was shown after uploading files.
   - Root cause: multiple function `.dot` files were generated, but a single JSON output (`before.json` / `after.json`) sometimes reflected only one function graph.
   - Fix: CFG generation now prefers `main` using `-cfg-func-name=main` for stable comparisons, and falls back to the first defined function when `main` is not present.
 - Updated Docker LLVM installation targets to `15~20` (bookworm-compatible).
   - `llvm-toolchain-bookworm-14` is no longer available on `apt.llvm.org`, so LLVM 14 was removed from local Docker setup and upload UI options.
 
-> Note: if `main` is absent, LLVM-FLOW now falls back automatically to another defined function instead of failing immediately.
+---
+
+### ✏️ TODO
+
+- Consider replacing the current fixed-function strategy (`main` first, then fallback to first defined function) with a function-selection workflow so users can choose exactly which function CFG to render.
 
 ---
 
