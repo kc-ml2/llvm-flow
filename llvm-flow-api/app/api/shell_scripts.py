@@ -26,9 +26,15 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll || true && \
+if ls .*.dot >/dev/null 2>&1; then CFG_FUNC_BEFORE=main; else CFG_FUNC_BEFORE=$(sed -n 's/^define[[:space:]].*@\"\\([^\"]*\\)\".*/\\1/p; t; s/^define[[:space:]].*@\\([^ (]*\\).*/\\1/p' before.ll | head -n 1); fi && \
+if [ -n "$CFG_FUNC_BEFORE" ]; then true; else echo "No defined function found in before.ll" >&2; exit 1; fi && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_BEFORE" before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_BEFORE" after.ll || true && \
+if ls .*.dot >/dev/null 2>&1; then true; else CFG_FUNC_AFTER=$(sed -n 's/^define[[:space:]].*@\"\\([^\"]*\\)\".*/\\1/p; t; s/^define[[:space:]].*@\\([^ (]*\\).*/\\1/p' after.ll | head -n 1); fi && \
+if [ -n "$CFG_FUNC_AFTER" ]; then $LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_AFTER" after.ll; else true; fi && \
+if ls .*.dot >/dev/null 2>&1; then true; else echo "No defined function found in after.ll" >&2; exit 1; fi && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
@@ -45,9 +51,15 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll || true && \
+if ls .*.dot >/dev/null 2>&1; then CFG_FUNC_BEFORE=main; else CFG_FUNC_BEFORE=$(sed -n 's/^define[[:space:]].*@\"\\([^\"]*\\)\".*/\\1/p; t; s/^define[[:space:]].*@\\([^ (]*\\).*/\\1/p' before.ll | head -n 1); fi && \
+if [ -n "$CFG_FUNC_BEFORE" ]; then true; else echo "No defined function found in before.ll" >&2; exit 1; fi && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_BEFORE" before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_BEFORE" after.ll || true && \
+if ls .*.dot >/dev/null 2>&1; then true; else CFG_FUNC_AFTER=$(sed -n 's/^define[[:space:]].*@\"\\([^\"]*\\)\".*/\\1/p; t; s/^define[[:space:]].*@\\([^ (]*\\).*/\\1/p' after.ll | head -n 1); fi && \
+if [ -n "$CFG_FUNC_AFTER" ]; then $LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_AFTER" after.ll; else true; fi && \
+if ls .*.dot >/dev/null 2>&1; then true; else echo "No defined function found in after.ll" >&2; exit 1; fi && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
@@ -62,9 +74,15 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll || true && \
+if ls .*.dot >/dev/null 2>&1; then CFG_FUNC_BEFORE=main; else CFG_FUNC_BEFORE=$(sed -n 's/^define[[:space:]].*@\"\\([^\"]*\\)\".*/\\1/p; t; s/^define[[:space:]].*@\\([^ (]*\\).*/\\1/p' before.ll | head -n 1); fi && \
+if [ -n "$CFG_FUNC_BEFORE" ]; then true; else echo "No defined function found in before.ll" >&2; exit 1; fi && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_BEFORE" before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_BEFORE" after.ll || true && \
+if ls .*.dot >/dev/null 2>&1; then true; else CFG_FUNC_AFTER=$(sed -n 's/^define[[:space:]].*@\"\\([^\"]*\\)\".*/\\1/p; t; s/^define[[:space:]].*@\\([^ (]*\\).*/\\1/p' after.ll | head -n 1); fi && \
+if [ -n "$CFG_FUNC_AFTER" ]; then $LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name="$CFG_FUNC_AFTER" after.ll; else true; fi && \
+if ls .*.dot >/dev/null 2>&1; then true; else echo "No defined function found in after.ll" >&2; exit 1; fi && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
