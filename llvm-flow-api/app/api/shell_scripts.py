@@ -26,9 +26,9 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main after.ll && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
@@ -45,9 +45,9 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main after.ll && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
@@ -62,9 +62,9 @@ llvm-block beforeg.ll afterg.ll 2> output.tsv && \
 $LLVM_BIN_PATH/opt -S beforeg.ll -o before.ll -strip-debug && \
 $LLVM_BIN_PATH/opt -strip-debug -S afterg.ll -o after.ll && \
 mkdir before after && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg before.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main before.ll && \
 mv .*.dot before && \
-$LLVM_BIN_PATH/opt -passes=dot-cfg after.ll && \
+$LLVM_BIN_PATH/opt -passes=dot-cfg -cfg-func-name=main after.ll && \
 mv .*.dot after && \
 cd before && \
 dot -Txdot_json -o before.json .*.dot && \
