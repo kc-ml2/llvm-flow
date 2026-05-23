@@ -48,8 +48,9 @@ This will start the application on http://localhost:3000
 - Fixed an intermittent CFG rendering bug where only one node was shown after uploading files.
   - Root cause: multiple function `.dot` files were generated, but a single JSON output (`before.json` / `after.json`) sometimes reflected only one function graph.
   - Fix: CFG generation now prefers `main` using `-cfg-func-name=main` for stable comparisons, and falls back to the first defined function when `main` is not present.
-- Updated Docker LLVM installation targets to `15~20` (bookworm-compatible).
-  - `llvm-toolchain-bookworm-14` is no longer available on `apt.llvm.org`, so LLVM 14 was removed from local Docker setup and upload UI options.
+- Updated Docker LLVM setup for bookworm compatibility.
+  - LLVM `15~20` is installed via `apt.llvm.org`.
+  - LLVM `14` is installed through a separate Debian package path because `llvm-toolchain-bookworm-14` is not available on `apt.llvm.org`.
 
 ---
 
