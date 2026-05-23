@@ -33,7 +33,7 @@ WORKDIR /llvm-block
 RUN wget https://github.com/kc-ml2/llvm-block/archive/refs/tags/v1.0.2.tar.gz -O llvm-block.tar.gz && \
     tar -xzf llvm-block.tar.gz --strip-components=1 && \
     rm llvm-block.tar.gz
-RUN  cmake --preset=default && cmake --build build 
+RUN cmake -S . -B build && cmake --build build
 RUN cp build/llvm-block/llvm-block /usr/bin/llvm-block
 
 RUN mkdir /var/run/sshd
