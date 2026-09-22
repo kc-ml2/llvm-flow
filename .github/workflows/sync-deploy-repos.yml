@@ -44,11 +44,11 @@ jobs:
           - service: api
             subdir: llvm-flow-api
             repo: kc-ml2/llvm-flow-api
-            # NOTE: `main` on this repo is an abandoned pre-renewal layout
-            # (backend/ + requirements.txt). The branch matching this monorepo
-            # is renewal-fix-docker2. Change this once the deploy branch is
-            # promoted to main.
-            base: renewal-fix-docker2
+            # `renewal` is the branch currently running on EC2.
+            # Do NOT use `main` here: it is an abandoned pre-renewal layout
+            # (backend/ + requirements.txt) and syncing onto it would rewrite
+            # a dead branch. Update this if the deployed branch changes.
+            base: renewal
           - service: frontend
             subdir: llvm-flow-frontend
             repo: kc-ml2/llvm-flow-frontend
@@ -87,9 +87,13 @@ jobs:
           set -euo pipefail
           # Deploy-owned or generated paths. `--exclude` also protects these
           # from `--delete`, so the deploy repo keeps its own versions.
+          # `.git` has no trailing slash on purpose: in a normal clone it is a
+          # directory, but in a git worktree it is a FILE. A `.git/` pattern
+          # matches only the directory form, which would let --delete remove
+          # the worktree's .git file. The slashless form covers both.
           rsync -a --delete \
-            --exclude '.git/' \
-            --exclude '.github/' \
+            --exclude '.git' \
+            --exclude '.github' \
             --exclude 'Dockerfile' \
             --exclude 'docker-compose*.yaml' \
             --exclude 'docker-compose*.yml' \
