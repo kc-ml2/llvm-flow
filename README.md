@@ -95,10 +95,41 @@ This will start the application on http://localhost:3000
 
 ---
 
+### 📦 Repository layout & deployment
+
+This repository is the **single source of truth**. Both services live here as a
+monorepo and are developed and reviewed only in this repo:
+
+- `llvm-flow-api/` — FastAPI backend
+- `llvm-flow-frontend/` — React frontend
+
+The hosted demo is deployed **per service from its subdirectory** — the monorepo
+layout does not change the hosting method:
+
+| Service  | Platform | How it deploys | Config / secrets |
+| -------- | -------- | -------------- | ---------------- |
+| Frontend | Vercel   | Project **Root Directory** = `llvm-flow-frontend/`; `craco build` runs unchanged | `REACT_APP_*` set in Vercel env settings (client-side vars, not committed) |
+| Backend  | AWS EC2  | Build/run from the `llvm-flow-api/` subdirectory (Docker) | `env.yaml` / stage secrets provided on the host, not committed |
+
+Application code is pushed to the deploy repositories by the
+[`Sync to deploy repos`](.github/workflows/sync-deploy-repos.yml) workflow, which
+opens a pull request for review rather than deploying directly.
+
+Deployment-only files (`Dockerfile`, `docker-compose*`, `.env*`, `.gitignore`) are
+excluded from the sync and stay owned by each deploy repository. Contributors
+never touch a deploy repo — everything lands here first.
+
+---
+
 ### ✅ Contribution
 
-- Please make a new branch instead of the current basic branch (ex. main) and work on it.
-- If there is an additional commit after the review, please proceed with the `Re-request` review!
+See **[CONTRIBUTING.md](CONTRIBUTING.md)** for the full guide (dev setup,
+formatting, and how passes are added).
+
+- Open pull requests against `main` in this repository.
+- Use a feature branch instead of committing to `main` directly.
+- Run the formatters (`ruff` for the API, `prettier`/`eslint` for the frontend) before committing.
+- If review leaves comments, push follow-ups and use **Re-request review**.
 
 ---
 
