@@ -1,0 +1,143 @@
+name: Sync to deploy repos
+
+# Pushes application code from this monorepo into the two private deploy repos.
+#
+# SAFETY MODEL
+#   - Never pushes to a deploy branch. It always opens a PR for human review.
+#   - Never touches deploy-only files (Dockerfile, compose, .env*, .gitignore).
+#     Those stay owned by each deploy repo. See `EXCLUDES` below.
+#   - Nothing auto-merges, so a wrong base branch cannot trigger a deploy.
+#
+# SETUP (one time)
+#   1. Create a PAT (or GitHub App token) with `repo` scope on
+#      kc-ml2/llvm-flow-api and kc-ml2/llvm-flow-frontend.
+#   2. Save it in this repo as the `SYNC_TOKEN` secret.
+#   3. Confirm the `base` branch for each service in the matrix below is the
+#      branch that actually deploys, then run this workflow manually once and
+#      review the resulting PR before relying on the automatic trigger.
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: Which deploy repo to sync
+        type: choice
+        options: [both, api, frontend]
+        default: both
+  push:
+    branches: [main]
+    paths:
+      - 'llvm-flow-api/**'
+      - 'llvm-flow-frontend/**'
+
+concurrency:
+  group: sync-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: api
+            subdir: llvm-flow-api
+            repo: kc-ml2/llvm-flow-api
+            # NOTE: `main` on this repo is an abandoned pre-renewal layout
+            # (backend/ + requirements.txt). The branch matching this monorepo
+            # is renewal-fix-docker2. Change this once the deploy branch is
+            # promoted to main.
+            base: renewal-fix-docker2
+          - service: frontend
+            subdir: llvm-flow-frontend
+            repo: kc-ml2/llvm-flow-frontend
+            base: main
+
+    steps:
+      - name: Skip services not selected
+        id: gate
+        run: |
+          want='${{ github.event.inputs.service || 'both' }}'
+          if [ "$want" = "both" ] || [ "$want" = "${{ matrix.service }}" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out monorepo (source of truth)
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Check out deploy repo
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.repo }}
+          ref: ${{ matrix.base }}
+          token: ${{ secrets.SYNC_TOKEN }}
+          path: target
+          fetch-depth: 0
+
+      - name: Copy application code (deploy config preserved)
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          set -euo pipefail
+          # Deploy-owned or generated paths. `--exclude` also protects these
+          # from `--delete`, so the deploy repo keeps its own versions.
+          rsync -a --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'Dockerfile' \
+            --exclude 'docker-compose*.yaml' \
+            --exclude 'docker-compose*.yml' \
+            --exclude '.env*' \
+            --exclude '.gitignore' \
+            --exclude 'media/' \
+            --exclude 'db-data/' \
+            --exclude '__pycache__/' \
+            --exclude 'node_modules/' \
+            --exclude 'build/' \
+            "source/${{ matrix.subdir }}/" "target/"
+
+      - name: Open or update sync PR
+        if: steps.gate.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
+          BASE: ${{ matrix.base }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          cd target
+          BRANCH="sync/from-public"
+
+          git config user.name  "llvm-flow-sync[bot]"
+          git config user.email "llvm-flow-sync@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No application-code changes to sync."
+            exit 0
+          fi
+
+          git commit -m "sync: application code from llvm-flow@${SHA:0:7}
+
+          Synced from kc-ml2/llvm-flow (monorepo is the source of truth).
+          Deploy config (Dockerfile, compose, .env*, .gitignore) not modified."
+          git push -f origin "$BRANCH"
+
+          gh pr create \
+            --base "$BASE" \
+            --head "$BRANCH" \
+            --title "sync: application code from llvm-flow" \
+            --body "Automated sync from [kc-ml2/llvm-flow](https://github.com/kc-ml2/llvm-flow) at \`${SHA:0:7}\`.
+
+          The monorepo is the source of truth for application code. Deploy-only files
+          (\`Dockerfile\`, \`docker-compose*\`, \`.env*\`, \`.gitignore\`) are excluded and remain
+          owned by this repo.
+
+          **Review the diff before merging** — merging may trigger a deployment." \
+            || echo "PR already open; force-push updated it."
