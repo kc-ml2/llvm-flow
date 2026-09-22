@@ -27,11 +27,13 @@ class Settings(BaseSettings):
         return project_root / "media"
 
     @property
-    def S3_BUCKET_SAFE(self) -> str | None:
-        if self.STAGE == "prod":
-            if not self.S3_BUCKET:
-                raise ValueError("S3_BUCKET must be set in production stage!")
-            return self.S3_BUCKET
+    def S3_BUCKET_SAFE(self) -> str:
+        if not self.S3_BUCKET:
+            raise ValueError(
+                "S3_BUCKET is not set. Set the LLVM_FLOW_S3_BUCKET "
+                "environment variable to use S3 storage."
+            )
+        return self.S3_BUCKET
 
     model_config = SettingsConfigDict(env_prefix="LLVM_FLOW_")
 
