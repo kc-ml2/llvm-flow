@@ -102,6 +102,10 @@ jobs:
             --exclude 'media/' \
             --exclude 'db-data/' \
             --exclude '__pycache__/' \
+            --exclude '.ruff_cache/' \
+            --exclude '.pytest_cache/' \
+            --exclude '.mypy_cache/' \
+            --exclude '.venv/' \
             --exclude 'node_modules/' \
             --exclude 'build/' \
             "source/${{ matrix.subdir }}/" "target/"
