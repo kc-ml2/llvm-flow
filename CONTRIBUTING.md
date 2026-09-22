@@ -1,9 +1,7 @@
 # Contributing to LLVM-FLOW
 
 This repository (`kc-ml2/llvm-flow`) is the **single source of truth** for both
-`llvm-flow-api/` and `llvm-flow-frontend/`. Deploy repositories are synced from
-here automatically — please do not send changes to them.
-
+`llvm-flow-api/` and `llvm-flow-frontend/`. 
 ## Pull request rules
 
 1. Branch off `main`. Do not commit to `main` directly.
